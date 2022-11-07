@@ -98,6 +98,7 @@ class KmeansClustering:
         """
         ax = plt.axes(projection="3d")
         for i in range(self.k):
+
             cluster = self.data[self.labels == i]
             x_points = cluster[:, 0]
             y_points = cluster[:, 1]
@@ -107,6 +108,7 @@ class KmeansClustering:
             ax.set_ylabel('Failure [%]', fontsize=12)
             ax.set_zlabel('Young\'s Modulus[GPa]', fontsize=12)
             ax.grid(False)
+
         plt.show()
         return None
 

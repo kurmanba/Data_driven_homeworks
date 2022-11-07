@@ -51,8 +51,6 @@ def generate_data():
 
         a_mat = np.random.randint(10) * np.random.rand(n, n) + np.eye(n) * np.random.randint(10)
         b_mat = np.random.randint(10) * np.dot(a_mat, a_mat.T)
-        # b_mat_scaled = (255 / np.max(b_mat)) * b_mat
-        # data[i, :] = b_mat_scaled.flatten()
         matplotlib.image.imsave('{}.png'.format(i), b_mat)
 
     return None

@@ -12,11 +12,11 @@ def generate_products_hw(d_max: int, x, y):
 
     (x**0)(y**0)(z**0),
     (x**1)(y**0)(z**0), ....
+
     """
 
     power_mat = np.arange(0, d_max)
     products = np.array(list(prod(power_mat, power_mat)))
-    np.random.shuffle(products)
 
     xyz_products = {key: value for key, value in enumerate(products)}
     a_mat = np.zeros((len(x), len(xyz_products.keys())))
@@ -45,6 +45,7 @@ def hw_detected_dynamical_system(t: int):
     x[0], y[0] = 0, 2
 
     for t in range(step_cnt):
+
         x_dot[t], y_dot[t] = f1(x[t], y[t]), f2(x[t], y[t])
 
         x[t + 1] = x[t] + (x_dot[t] * dt)
@@ -70,6 +71,9 @@ if __name__ == "__main__":
     x1 = data[:, 0]
     x2 = data[:, 1]
     time = np.load('DataHw3Q1_t.npy')
+
+    # derivative can be taken by approximating the function by polynomials
+    # for this exercise simple derivative was taken.
 
     derivative1 = (x1[1:] - x1[:-1]) / 0.1
     derivative2 = (x2[1:] - x2[:-1]) / 0.1
