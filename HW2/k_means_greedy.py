@@ -117,7 +117,7 @@ if __name__ == '__main__':
     strength = data[:, 0]           # strength [MPa]
     strain_failure = data[:, 1]     # [%]
     elastic_modulus = data[:, 2]    # [GPa]
-    k_size = 3
+    k_size = 2
     max_iterations = 100
 
     k_means = KmeansClustering(data, k_size)

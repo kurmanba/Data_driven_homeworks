@@ -10,8 +10,8 @@ if __name__ == "__main__":
     strength = data[:, 0]               # strength [MPa]
     strain_failure = data[:, 1]         # [%]
     elastic_modulus = data[:, 2]        # [GPa]
-    k_size = 3
-    max_iterations = 500
+    k_size = 2
+    max_iterations = 1000
     [n, m] = np.shape(data)
 
     # data, _ = make_blobs(n_samples=200, n_features=m, centers=k_size)
@@ -19,8 +19,8 @@ if __name__ == "__main__":
     states = np.arange(k_size)
     hamiltonian = k_means.objective_function()
     energy = []
-    energy.append(hamiltonian)
-    temperature = 2
+    temperature = 3
+    temperatures = []
 
     for _ in tqdm(range(max_iterations)):
 
@@ -30,7 +30,8 @@ if __name__ == "__main__":
         k_means.labels[sample_element] = int(new_state)
         new_hamiltonian = k_means.objective_function()
         de = new_hamiltonian - hamiltonian
-        temperature *= 0.93
+        temperature *= 0.96
+        temperatures.append(temperature)
 
         if de <= 0 or np.exp(- de / temperature) > np.random.random():
             hamiltonian = new_hamiltonian
@@ -43,3 +44,5 @@ if __name__ == "__main__":
     k_means.determine_centroids()
     k_means.assign_cluster()
     k_means.visualize_clusters_3d()
+    plt.plot(temperatures)
+    plt.show()
